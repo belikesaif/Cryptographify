@@ -135,7 +135,7 @@ export function Dashboard({ onLogout }) {
     {
       id: "doge",
       name: "Doge Coin",
-      symbol: "doge",
+      symbol: "DOGE",
       price: 23.45,
       change: 3.1,
       volume: 4567.8,
