@@ -1,15 +1,15 @@
-"use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import axios from "axios";
-import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+"use client"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import axios from "axios"
+import Link from "next/link"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 
 export function Signuplogin({ onLogin }) {
-  const [currentPage, setCurrentPage] = useState("login");
-  const [showPassword, setShowPassword] = useState(false);
+  const [currentPage, setCurrentPage] = useState("login")
+  const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const router = useRouter();
 
@@ -21,10 +21,10 @@ export function Signuplogin({ onLogin }) {
     e.preventDefault();
 
     const url = currentPage === "login" ? "/api/auth/login" : "/api/auth/signup";
-
+    
     try {
       const response = await axios.post(url, formData);
-      alert(Success: ${response.data.message});
+      alert(`Success: ${response.data.message}`);
 
       if (currentPage === "login") {
         onLogin();
@@ -32,171 +32,113 @@ export function Signuplogin({ onLogin }) {
         setCurrentPage("login");
       }
     } catch (error) {
-      alert(Error: ${error.response.data.message});
+      alert(`Error: ${error.response.data.message}`);
     }
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-black to-white text-black">
-      <div className="text-center py-8">
-        <h1 className="text-5xl font-extrabold text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-          Cryptographify
-        </h1>
-        <p className="text-xl text-white mt-2" style={{ fontFamily: "'Poppins', sans-serif" }}>
-        Crypto analysis, empowered.
-        </p>
-      </div>  
-      <div className="flex-1 flex items-center justify-center px-4 sm:px-0 md:px-6">
-        <div className="w-full max-w-md bg-white dark:bg-black p-8 rounded-lg shadow-lg">
-          <div className="flex justify-between mb-4">
-            <Button
-              variant={currentPage === "login" ? "solid" : "outline"}
-              onClick={() => setCurrentPage("login")}
-              className={w-1/2 mr-1 ${currentPage === "login" ? "bg-black text-white hover:text-gray-500" : "bg-white text-black hover:text-gray-500"}}
-            >
-              Log In
-            </Button>
-            <Button
-              variant={currentPage === "signup" ? "solid" : "outline"}
-              onClick={() => setCurrentPage("signup")}
-              className={w-1/2 ml-1 ${currentPage === "signup" ? "bg-black text-white hover:text-gray-500" : "bg-white text-black hover:text-gray-500"}}
-            >
-              Sign Up
-            </Button>
-          </div>
-          {currentPage === "login" && (
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-[#6b7280] to-[#374151]">
+      {currentPage === "login" && (
+        <div className="flex-1 flex items-center justify-center px-4 sm:px-0 md:px-6">
+          <div className="w-full max-w-md space-y-8 bg-white dark:bg-gray-950 p-8 rounded-lg shadow-lg">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-4">Sign in to your account</h2>
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Email address
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Sign in to your account</h2>
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                <Link href="#" className="font-medium text-primary-600 hover:text-primary-500" onClick={() => setCurrentPage("signup")}>
+                  Create a new account
+                </Link>
+              </p>
+            </div>
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Email address
+                </label>
+                <div className="mt-1">
+                  <Input id="email" name="email" type="email" autoComplete="email" required onChange={handleChange} className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Password
+                </label>
+                <div className="mt-1 relative">
+                  <Input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="current-password" required onChange={handleChange} className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" />
+                  <Button type="button" variant="ghost" size="icon" className="absolute inset-y-0 right-0 pr-3 flex items-center" onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? <EyeIcon className="h-5 w-5 text-gray-400" /> : <EyeOffIcon className="h-5 w-5 text-gray-400" />}
+                  </Button>
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <Checkbox id="remember-me" name="remember-me" />
+                  <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-gray-50">
+                    Remember me
                   </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    onChange={handleChange}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                  />
                 </div>
-                <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Password
-                  </label>
-                  <div className="mt-1 relative">
-                    <Input
-                      id="password"
-                      name="password"
-                      type={showPassword ? "text" : "password"}
-                      autoComplete="current-password"
-                      required
-                      onChange={handleChange}
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                    />
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <EyeIcon className="h-5 w-5 text-gray-400" /> : <EyeOffIcon className="h-5 w-5 text-gray-400" />}
-                    </Button>
-                  </div>
+                <div className="text-sm">
+                  <Link href="#" className="font-medium text-primary-600 hover:text-primary-500">
+                    Forgot your password?
+                  </Link>
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <Checkbox id="remember-me" name="remember-me" />
-                    <label htmlFor="remember-me" className="ml-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Remember me
-                    </label>
-                  </div>
-                  <div className="text-sm">
-                    <Link href="#" className="font-medium text-primary-600 hover:text-primary-500">
-                      Forgot your password?
-                    </Link>
-                  </div>
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-black rounded-md shadow-sm text-sm font-medium text-black bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-                >
+              </div>
+              <div>
+                <Button type="submit" className="w-full flex justify-center py-2 px-4 border border-black rounded-md shadow-sm text-sm font-medium text-black bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
                   Sign in
                 </Button>
-              </form>
-            </div>
-          )}
-          {currentPage === "signup" && (
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      {currentPage === "signup" && (
+        <div className="flex-1 flex items-center justify-center px-4 sm:px-0 md:px-6">
+          <div className="w-full max-w-md space-y-8 bg-white dark:bg-gray-950 p-8 rounded-lg shadow-lg">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-4">Sign in to your account</h2>
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Name
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    required
-                    onChange={handleChange}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                  />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Email address
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      onChange={handleChange}
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Password
-                    </label>
-                    <div className="mt-1 relative">
-                      <Input
-                        id="password"
-                        name="password"
-                        type={showPassword ? "text" : "password"}
-                        autoComplete="current-password"
-                        required
-                        onChange={handleChange}
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                      />
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <EyeIcon className="h-5 w-5 text-gray-400" /> : <EyeOffIcon className="h-5 w-5 text-gray-400" />}
-                    </Button>
-                  </div>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-50">Create a new account</h2>
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                <Link href="#" className="font-medium text-primary-600 hover:text-primary-500" onClick={() => setCurrentPage("login")}>
+                  Sign in to your existing account
+                </Link>
+              </p>
+            </div>
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Name
+                </label>
+                <div className="mt-1">
+                  <Input id="name" name="name" type="text" autoComplete="name" required onChange={handleChange} className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" />
                 </div>
-                <Button
-                  type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-black rounded-md shadow-sm text-sm font-medium text-black bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-                >
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Email address
+                </label>
+                <div className="mt-1">
+                  <Input id="email" name="email" type="email" autoComplete="email" required onChange={handleChange} className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Password
+                </label>
+                <div className="mt-1 relative">
+                  <Input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="new-password" required onChange={handleChange} className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" />
+                  <Button type="button" variant="ghost" size="icon" className="absolute inset-y-0 right-0 pr-3 flex items-center" onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? <EyeIcon className="h-5 w-5 text-gray-400" /> : <EyeOffIcon className="h-5 w-5 text-gray-400" />}
+                  </Button>
+                </div>
+              </div>
+              <div>
+                <Button type="submit" className="w-full flex justify-center py-2 px-4 border border-black rounded-md shadow-sm text-sm font-medium text-black bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
                   Sign up
                 </Button>
-              </form>
-            </div>
-          )}
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -209,6 +151,7 @@ function EyeIcon(props) {
     </svg>
   );
 }
+
 
 function EyeOffIcon(props) {
   return (
