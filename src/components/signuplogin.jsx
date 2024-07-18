@@ -24,7 +24,7 @@ export function Signuplogin({ onLogin }) {
 
     try {
       const response = await axios.post(url, formData);
-      alert(`Success: ${response.data.message}`);
+      alert(Success: ${response.data.message});
 
       if (currentPage === "login") {
         onLogin();
@@ -32,7 +32,7 @@ export function Signuplogin({ onLogin }) {
         setCurrentPage("login");
       }
     } catch (error) {
-      alert(`Error: ${error.response.data.message}`);
+      alert(Error: ${error.response.data.message});
     }
   };
 
@@ -52,14 +52,14 @@ export function Signuplogin({ onLogin }) {
             <Button
               variant={currentPage === "login" ? "solid" : "outline"}
               onClick={() => setCurrentPage("login")}
-              className={`w-1/2 mr-1 ${currentPage === "login" ? "bg-black text-white hover:text-gray-500" : "bg-white text-black hover:text-gray-500"}`}
+              className={w-1/2 mr-1 ${currentPage === "login" ? "bg-black text-white hover:text-gray-500" : "bg-white text-black hover:text-gray-500"}}
             >
               Log In
             </Button>
             <Button
               variant={currentPage === "signup" ? "solid" : "outline"}
               onClick={() => setCurrentPage("signup")}
-              className={`w-1/2 ml-1 ${currentPage === "signup" ? "bg-black text-white hover:text-gray-500" : "bg-white text-black hover:text-gray-500"}`}
+              className={w-1/2 ml-1 ${currentPage === "signup" ? "bg-black text-white hover:text-gray-500" : "bg-white text-black hover:text-gray-500"}}
             >
               Sign Up
             </Button>
@@ -79,7 +79,7 @@ export function Signuplogin({ onLogin }) {
                     autoComplete="email"
                     required
                     onChange={handleChange}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-white focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm text-white"
                   />
                 </div>
                 <div>
@@ -94,7 +94,7 @@ export function Signuplogin({ onLogin }) {
                       autoComplete="current-password"
                       required
                       onChange={handleChange}
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-white focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm text-white"
                     />
                     <Button
                       type="button"
@@ -122,7 +122,7 @@ export function Signuplogin({ onLogin }) {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-black rounded-md shadow-sm text-sm font-medium text-black bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                  className="w-full flex justify-center py-2 px-4 border border-black rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                 >
                   Sign in
                 </Button>
@@ -131,7 +131,7 @@ export function Signuplogin({ onLogin }) {
           )}
           {currentPage === "signup" && (
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-4">Sign in to your account</h2>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-4">Create your account</h2>
               <form className="space-y-6" onSubmit={handleSubmit}>
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -144,7 +144,7 @@ export function Signuplogin({ onLogin }) {
                     autoComplete="name"
                     required
                     onChange={handleChange}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-white focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm text-white"
                   />
                   </div>
                   <div>
@@ -158,7 +158,7 @@ export function Signuplogin({ onLogin }) {
                       autoComplete="email"
                       required
                       onChange={handleChange}
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-white focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm text-white"
                     />
                   </div>
                   <div>
@@ -173,7 +173,7 @@ export function Signuplogin({ onLogin }) {
                         autoComplete="current-password"
                         required
                         onChange={handleChange}
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-white focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm text-white"
                       />
                     <Button
                       type="button"
@@ -188,7 +188,7 @@ export function Signuplogin({ onLogin }) {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-black rounded-md shadow-sm text-sm font-medium text-black bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                  className="w-full flex justify-center py-2 px-4 border border-black rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                 >
                   Sign up
                 </Button>
@@ -203,7 +203,8 @@ export function Signuplogin({ onLogin }) {
 
 function EyeIcon(props) {
   return (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2
+strokeLinecap="round" strokeLinejoin="round">
       <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
       <circle cx="12" cy="12" r="3" />
     </svg>
